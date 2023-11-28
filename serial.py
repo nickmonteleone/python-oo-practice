@@ -23,22 +23,17 @@ class SerialGenerator:
     def __init__(self, start=100):
         """initialize current number as None and record start"""
 
-        self.start = start
-        self.current_number = None
+        self.start = self.current_number = start
 
     def generate(self):
-        """add number to current number if not None and return
-        for current number None (initial value) set to start and return"""
+        """add number to current number and return number -1"""
 
-        if self.current_number is None:
-            self.current_number = self.start
-        else:
-            self.current_number += 1
+        self.current_number += 1
 
-        return self.current_number
+        return self.current_number - 1
 
     def reset(self):
-        """reset current number to None to restart at start """
+        """reset current number to start"""
 
-        self.current_number = None
+        self.current_number = self.start
 
