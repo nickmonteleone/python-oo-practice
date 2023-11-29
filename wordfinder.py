@@ -20,9 +20,17 @@ class WordFinder:
         converted_list = []
         with open(path, "r") as file:
             for line in file:
-                line = line.replace("\n", "")
-                converted_list.append(line)
+                word = self.filter_line_to_word(line)
+                if word is not None:
+                    converted_list.append(word)
         return converted_list
+
+    def filter_line_to_word(self, line):
+        """filter text file line and return word.
+        Remove new line chars only"""
+
+        word = line.replace("\n", "")
+        return word
 
     def display_words_read(self):
         """prints out in a formatted string the number of words read
@@ -35,3 +43,18 @@ class WordFinder:
         a random string from the instance's word list"""
 
         return choice(self.word_list)
+
+
+class SpecialWordFinder(WordFinder):
+    """Modified word finder sub class to also filter out comments
+    and blank lines from file input"""
+
+    def filter_line_to_word(self, line):
+        """filter text file line and return word.
+        Remove new line and any blank words or comments"""
+
+        word = line.replace("\n", "")
+        if len(word) > 0 and word[0] != '#':
+            return word
+        else:
+            return None
