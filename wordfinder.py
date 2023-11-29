@@ -3,7 +3,18 @@
 from random import choice
 
 class WordFinder:
-    """Word Finder: finds random words from a dictionary."""
+    """Word Finder: finds random words from a dictionary.
+
+    >>> word_finder = WordFinder('./words.txt')
+    8 words read
+
+    >>> word_finder.word_list
+    ['cat', 'dog', 'porcupine', 'rithm', 'Eric', 'Nick', 'dark', 'learning']
+
+    >>> word_finder.random() in word_finder.word_list
+    True
+
+    """
 
     def __init__(self, path):
         """initializes word_list to be a list of strings converted from
