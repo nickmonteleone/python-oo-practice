@@ -19,6 +19,7 @@ class WordFinder:
 
         converted_list = []
         with open(path, "r") as file:
+            # TODO: break parse file into separate function
             for line in file:
                 word = self.filter_line_to_word(line)
                 if word is not None:
@@ -29,6 +30,7 @@ class WordFinder:
         """filter text file line and return word.
         Remove new line chars only"""
 
+        # TODO: use .strip() - takes care of any white space
         word = line.replace("\n", "")
         return word
 
@@ -58,3 +60,4 @@ class SpecialWordFinder(WordFinder):
             return word
         else:
             return None
+
