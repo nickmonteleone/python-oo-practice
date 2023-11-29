@@ -16,23 +16,19 @@ class WordFinder:
     def convert_file_to_list(self, path):
         """reads the file given the path into a list of strings with the
         new line character removed from each string"""
-
-        converted_list = []
         with open(path, "r") as file:
-            # TODO: break parse file into separate function
-            for line in file:
-                word = self.filter_line_to_word(line)
-                if word is not None:
-                    converted_list.append(word)
+            converted_list = self.filter_file_to_words(file)
         return converted_list
 
-    def filter_line_to_word(self, line):
+    def filter_file_to_words(self, file):
         """filter text file line and return word.
         Remove new line chars only"""
 
-        # TODO: use .strip() - takes care of any white space
-        word = line.replace("\n", "")
-        return word
+        converted_list = []
+        for line in file:
+            word = line.strip("\n").strip("\r")
+            converted_list.append(word)
+        return converted_list
 
     def display_words_read(self):
         """prints out in a formatted string the number of words read
@@ -51,13 +47,14 @@ class SpecialWordFinder(WordFinder):
     """Modified word finder sub class to also filter out comments
     and blank lines from file input"""
 
-    def filter_line_to_word(self, line):
+    def filter_file_to_words(self, file):
         """filter text file line and return word.
         Remove new line and any blank words or comments"""
 
-        word = line.replace("\n", "")
-        if len(word) > 0 and word[0] != '#':
-            return word
-        else:
-            return None
+        converted_list = []
+        for line in file:
+            word = line.strip("\n").strip("\r")
+            if len(word) > 0 and word[0] != '#':
+                converted_list.append(word)
+        return converted_list
 
